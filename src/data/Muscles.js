@@ -1,4 +1,4 @@
- export default [
+export default [
     {
         id : 0,
         image : require("./../assets/images/Biceps.png"),
@@ -7,7 +7,7 @@
     {
         id : 1,
         image : require("./../assets/images/Pectoraux.png"),
-        title: "Pectoraux"
+        title: "Pectoraux",
     },
     {
         id : 2,
@@ -28,5 +28,10 @@
         id : 5,
         image : require("./../assets/images/Mollets.png"),
         title : "Mollets"
+    },
+    {
+        id : 6,
+        image : require("./../assets/images/Poids.png"),
+        title : "Poids"
     }
 ]
