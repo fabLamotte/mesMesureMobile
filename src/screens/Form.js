@@ -6,7 +6,10 @@ import MuscleItem from './../components/MuscleItem'
 import Paginator from '../components/Paginator.js'
 import NextButton from '../components/NextButton.js'
 
-const Form = () => {
+const Form = (props) => {
+    const {
+        navigation
+    } = props
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const scrollX = useRef(new Animated.Value(0)).current
@@ -102,15 +105,9 @@ const Form = () => {
                         mollet={mollet}
                         poids={poids}
                         errorMessage={errorMessage}
-                        setBiceps={setBiceps}
-                        setPectoraux={setPectoraux}
-                        setTaille={setTaille}
-                        setFesses={setFesses}
-                        setCuisses={setCuisses}
-                        setMollets={setMollets}
-                        setPoids={setPoids}
                         Muscles={Muscles}
                         setErrorMessage={setErrorMessage}
+                        navigation={navigation}
                     />
                     <Paginator 
                         data={Muscles} 

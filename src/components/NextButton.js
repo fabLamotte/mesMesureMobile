@@ -12,20 +12,14 @@ const NextButton = (props) => {
         cuisses,
         mollet,
         poids,
-        errorMessage,
-        setBiceps,
-        setPectoraux,
-        setTaille,
-        setFesses,
-        setCuisses,
-        setMollets,
-        setPoids,
         setErrorMessage,
         currentIndex,
-        Muscles
+        Muscles,
+        navigation
     } = props
     
     const checkValue = () => {
+        setErrorMessage('')
         var value = "";
         switch(currentIndex){
             case 0 : value = biceps; break;
@@ -37,22 +31,35 @@ const NextButton = (props) => {
             case 6 : value = poids; break;
         }
 
-        if(value.match('/[0-9]+(\.[0-9][0-9]?)?/gm')){
+        var regex = /^[0-9]+([.,][0-9]{0,2})?$/
+
+        if(regex.test(value)){
             scrollToNext()
         } else {
             setErrorMessage("Votre saisie n'est pas du bon format")
         }
-    }
 
+        if(currentIndex == Muscles.length-1){
+            navigation.navigate("Progression")
+        }
+    }
 
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={scrollToPrevious}>
                 <Text style={styles.text}>Précédent</Text>        
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={checkValue}>
-                <Text style={styles.text}>{currentIndex == Muscles.length-1 ? "Valider" :"Suivant"}</Text>        
-            </TouchableOpacity>
+            {
+                currentIndex == Muscles.length-1 ?
+                    <TouchableOpacity style={styles.button} onPress={checkValue}>
+                        <Text style={styles.text}>Valider</Text>
+                    </TouchableOpacity>
+                :
+                    <TouchableOpacity style={styles.button} onPress={checkValue}>
+                        <Text style={styles.text}>Suivant</Text>
+                    </TouchableOpacity>
+
+            }
         </View>
     )
 }
