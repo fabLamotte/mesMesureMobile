@@ -1,20 +1,22 @@
-import React, {useRef} from 'react'
-import { FlatList, Animated } from 'react-native'
+import React from 'react'
+import { FlatList, View } from 'react-native'
 
 import Muscles from '../../data/Muscles'
 import ButtonItem from './ButtonItem'
 
 const ButtonMuscles = () => {
-    const scrollX = useRef(new Animated.Value(0)).current
 
     return (
-        <FlatList
-            data={Muscles}
-            horizontal
-            renderItem={({item}) => <ButtonItem item={item} />}
-            keyExtractor={item => item.id}
-            scrollEnabled={true}
-        />
+        <View>
+            <FlatList
+                data={Muscles}
+                horizontal
+                renderItem={({item}) => <ButtonItem item={item} />}
+                keyExtractor={item => item.id}
+                scrollEnabled={true}
+                showsHorizontalScrollIndicator={false}
+            />
+        </View>
     )
 }
 
