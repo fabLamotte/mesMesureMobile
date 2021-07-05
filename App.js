@@ -1,12 +1,27 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import SplashScreen from './src/components/SplashScreen'
 import Navigator from './src/components/Navigator'
 
-const App = () => {
+import firestore from '@react-native-firebase/firestore'
 
-  const [isLoading, setIsLoading] = useState(false)
+
+const App = () => {
+  const [userName, setUserName] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+
+  const getUser = async() => {
+  }
+
+  useEffect(() => {
+    const mesureDocument = firestore().collection("mesures").onSnapshot(doc => {
+      doc.forEach((element) => {
+        console.log(element.data())
+      })
+    })
+    setIsLoading(false)
+  }, [isLoading])
 
   return isLoading? (
     <SplashScreen/>

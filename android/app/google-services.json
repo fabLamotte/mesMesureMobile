@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "73471889347",
+    "project_id": "bodybuild-6a40c",
+    "storage_bucket": "bodybuild-6a40c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73471889347:android:52d3a2e238e9617c2d3776",
+        "android_client_info": {
+          "package_name": "com.mesmesures"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73471889347-qsrhb4sbjc66mjil79rtc02f377n0lei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXm49sEFLWgL0zSszEvfhYUgr6mM0-pz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73471889347-qsrhb4sbjc66mjil79rtc02f377n0lei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

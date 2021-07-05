@@ -1,10 +1,16 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory-native"
 
-const Graph = () => {
+const Graph = (props) => {
+
+    const {
+        title
+    } = props
+
     return(
         <View style={styles.container}>
+            <Text style={styles.title}>{title? title : "Biceps"}</Text>
             <VictoryChart height={250} >
                 <VictoryLine 
                     style={{ bar: {
@@ -33,6 +39,11 @@ const Graph = () => {
 }
 
 const styles = StyleSheet.create({
+    title:{
+        textAlign:'center',
+        color:'white',
+        fontWeight:'bold'
+    }
 })
 
 export default Graph

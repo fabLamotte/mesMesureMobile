@@ -4,14 +4,18 @@ import { FlatList, View } from 'react-native'
 import Muscles from '../../data/Muscles'
 import ButtonItem from './ButtonItem'
 
-const ButtonMuscles = () => {
+const ButtonMuscles = (props) => {
+
+    const {
+        setTitle
+    } = props
 
     return (
         <View>
             <FlatList
                 data={Muscles}
                 horizontal
-                renderItem={({item}) => <ButtonItem item={item} />}
+                renderItem={({item}) => <ButtonItem item={item} setTitle={setTitle} />}
                 keyExtractor={item => item.id}
                 scrollEnabled={true}
                 showsHorizontalScrollIndicator={false}

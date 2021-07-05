@@ -7,13 +7,16 @@ import Graph from '../components/progressComponent/Graph'
 import Weight from '../components/progressComponent/Weight'
 
 const Progress = () => {
+
+    const [title, setTitle] = useState("")
+
     return (
         <View style={styles.container}>
             <View style={styles.titleZone}>
                 <Text style={styles.title}>Votre progression</Text>
             </View>
-            <ButtonMuscles />
-            <Graph />
+            <ButtonMuscles setTitle={setTitle} />
+            <Graph title={title} />
             <Weight />
             <DateChecking />
         </View>
