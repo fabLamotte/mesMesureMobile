@@ -9,7 +9,6 @@ const Stack = createStackNavigator()
 
 const Navigator = () => {
     return (    
-        <NavigationContainer>
             <Stack.Navigator initialRouteName="Formulaire" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Formulaire">
                     {(props) => <Form {...props} />}
@@ -18,7 +17,6 @@ const Navigator = () => {
                     {(props) => <Progress {...props} />}
                 </Stack.Screen>
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }
 
