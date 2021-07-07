@@ -1,3 +1,6 @@
+import openRealm from "../database/OpenRealm"
+import { ObjectId } from "bson";
+
 export function getActions(app, dispatch) {
     return {
       signIn: async data => {
@@ -30,6 +33,22 @@ export function getActions(app, dispatch) {
           const credentials = Realm.Credentials.emailPassword(email, password);
   
           const user = await app.logIn(credentials);
+
+          const realm = await openRealm()
+          var inscrit = ""
+          realm.write(() => {
+            inscrit = realm.create("User", 
+              {
+                _id : new ObjectId(user.id),
+                _partition: user.id,
+                name: email,
+              }
+            ) 
+            console.log(inscrit)
+          })
+          realm.close()
+
+
           dispatch({type: 'SIGN_IN', userId: user.id});
         } catch (error) {
           console.log(

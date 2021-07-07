@@ -75,7 +75,6 @@ const Inscription = () => {
                         onBlur={onBlur}
                         onChangeText={onChange}
                         error={errors.password}
-                        keyboardType="visible-password"
                         secureTextEntry={true}
                         passwordRules="minlength: 20; required: lower; required: upper; required: digit; required: [-];"
                         placeholder="Mot de passe"
@@ -98,7 +97,6 @@ const Inscription = () => {
                         onBlur={onBlur}
                         onChangeText={onChange}
                         error={errors.password}
-                        keyboardType="visible-password"
                         secureTextEntry={true}
                         passwordRules="minlength: 20; required: lower; required: upper; required: digit; required: [-];"
                         placeholder="Répétez mot de passe"

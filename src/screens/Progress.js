@@ -1,14 +1,21 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import React, {useContext, useState} from 'react'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 
 import ButtonMuscles from '../components/progressComponent/ButtonMuscles'
 import DateChecking from '../components/progressComponent/DateChecking'
 import Graph from '../components/progressComponent/Graph'
 import Weight from '../components/progressComponent/Weight'
 
+import { AuthContext } from '../contexts/AuthContext'
+
 const Progress = () => {
 
     const [title, setTitle] = useState("")
+    const {signOut} = useContext(AuthContext)
+
+    async function onLogOut() {
+        await signOut()
+    }
 
     return (
         <View style={styles.container}>
@@ -19,13 +26,18 @@ const Progress = () => {
             <Graph title={title} />
             <Weight />
             <DateChecking />
+            <View style={styles.buttonZone}>
+                <TouchableOpacity style={styles.disconnect} onPress={onLogOut}>
+                    <Text style={styles.whiteColor}>Me déconnecter</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-        height:'100%',
+        flex:1,
         backgroundColor:'#272727',
     },
     titleZone:{
@@ -35,7 +47,26 @@ const styles = StyleSheet.create({
     },
     title:{
         color:'white',
-        textAlign:'center'
+        textAlign:'center',
+    },
+    buttonZone:{
+        width:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+        height:50
+    },
+    disconnect:{
+        height:50,
+        backgroundColor:"#880C0C",
+        width:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    whiteColor:{
+        color:'white',
+        fontSize:18,
+        fontWeight:'bold',
+
     }
 })
 

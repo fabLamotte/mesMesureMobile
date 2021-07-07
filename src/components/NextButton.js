@@ -1,5 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
+import moment from 'moment'
+import { getApp } from './../database/GetRealmApp'
+import openRealm from './../database/OpenRealm'
+
 
 const NextButton = (props) => {
     const {
@@ -18,7 +22,7 @@ const NextButton = (props) => {
         navigation
     } = props
     
-    const checkValue = () => {
+    const checkValue = async() => {
         setErrorMessage('')
         var value = "";
         switch(currentIndex){
@@ -39,7 +43,22 @@ const NextButton = (props) => {
             setErrorMessage("Votre saisie n'est pas du bon format")
         }
 
+        // Ajout des mesures en bdd à la validation de la dernière mesure
         if(currentIndex == Muscles.length-1){
+
+            // Récupération des données
+                var date = moment()
+                var mesures = {date,biceps,pectoraux,taille,fesses,cuisses,mollet}
+
+            // Appel de la BDD
+                // const app = getApp()
+                // const realm = await openRealm()
+                // const userContainer = realm.objects("User")
+                // const user = userContainer.filtered("_id == " + app.currentUser.id)
+                // console.log(user)
+                
+
+            // Redirection vers la progression
             navigation.navigate("Progression")
         }
     }

@@ -1,7 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+import moment from 'moment'
 
 const DateChecking = () => {
+
+    const date = moment()
+
     return(
         <View style={styles.container}>
             <Text style={styles.content}>Vos prochaines saisies seront disponible dans</Text>
@@ -12,7 +16,7 @@ const DateChecking = () => {
 
 const styles = StyleSheet.create({
     container:{
-        height:150,
+        height:100,
         justifyContent:'center',
         alignItems:'center'
     },

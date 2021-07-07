@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { StyleSheet, View, Text, FlatList, Animated, ScrollView } from 'react-native'
 
 import Muscles from './../data/Muscles.js'
 import MuscleItem from './../components/MuscleItem'
 import Paginator from '../components/Paginator.js'
 import NextButton from '../components/NextButton.js'
+
+import openRealm from '../database/OpenRealm.js'
 
 const Form = (props) => {
     const {
@@ -145,7 +147,7 @@ const visual = StyleSheet.create({
     bar1: {
         position: 'absolute',
         backgroundColor: '#880C0C',
-        height: 1000,
+        height: 1200,
         width: 100,
         transform: [{ rotate: '25deg' }],
         marginTop: -350,
@@ -154,7 +156,7 @@ const visual = StyleSheet.create({
     bar2: {
         position: 'absolute',
         backgroundColor: '#880C0C',
-        height: 1000,
+        height: 1200,
         width: 50,
         transform: [{ rotate: '45deg' }],
         marginTop: -50
@@ -162,7 +164,7 @@ const visual = StyleSheet.create({
     bar3: {
         position: 'absolute',
         backgroundColor: '#880C0C',
-        height: 1000,
+        height: 1200,
         width: 25,
         transform: [{ rotate: '65deg' }],
         marginTop: 30
@@ -170,7 +172,7 @@ const visual = StyleSheet.create({
     bar4: {
         position: 'absolute',
         backgroundColor: '#880C0C',
-        height: 1000,
+        height: 1200,
         width: 10,
         transform: [{ rotate: '80deg' }],
         marginTop: 70
@@ -180,7 +182,7 @@ const visual = StyleSheet.create({
         height: '100%',
         width: '100%',
         backgroundColor: 'black',
-        opacity: 0.3
+        opacity: 0.2
     }
 })
 
