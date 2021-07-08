@@ -7,7 +7,8 @@ import ButtonItem from './ButtonItem'
 const ButtonMuscles = (props) => {
 
     const {
-        setTitle
+        setTitle,
+        setZoneCible
     } = props
 
     return (
@@ -15,7 +16,7 @@ const ButtonMuscles = (props) => {
             <FlatList
                 data={Muscles}
                 horizontal
-                renderItem={({item}) => <ButtonItem item={item} setTitle={setTitle} />}
+                renderItem={({item}) => <ButtonItem item={item} setTitle={setTitle} setZoneCible={setZoneCible} />}
                 keyExtractor={item => item.id}
                 scrollEnabled={true}
                 showsHorizontalScrollIndicator={false}

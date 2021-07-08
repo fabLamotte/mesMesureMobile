@@ -42,7 +42,7 @@ export function getActions(app, dispatch) {
                 _id : new ObjectId(user.id),
                 _partition: user.id,
                 name: email,
-              }
+              }, 'modified'
             ) 
             console.log(inscrit)
           })

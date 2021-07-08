@@ -39,6 +39,7 @@ const Inscription = () => {
     function registerUser(data) {
         signUp(data);
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.brandZone}>

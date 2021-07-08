@@ -1,14 +1,19 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 
-const Weight = () => {
+const Weight = (props) => {
+
+    const {
+        userInfos
+    } = props
+
     return(
         <View style={styles.container}>
             <View style={styles.weightZone}>
-                <Text style={styles.weight}>86.5</Text>
+                <Text style={styles.weight}>{userInfos.mesures[userInfos.mesures.length-1].poids}</Text>
                 <Text style={styles.kilo}>KG</Text>
             </View>
-            <Text style={styles.perte}>-2.3 Kg</Text>
+            <Text style={styles.perte}></Text>
         </View>
     )
 }

@@ -1,6 +1,6 @@
 import Realm from 'realm'
 
-const appId = 'bodybuild-piwsq'
+const appId = 'mesmesures-vikkv'
 export function getApp() {
   const appConfig = {
     id: appId,

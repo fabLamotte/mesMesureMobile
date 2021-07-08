@@ -6,6 +6,8 @@ import {reducer} from './src/reducers/reducer'
 import {getActions} from './src/actions/authActions'
 import { AuthContext } from './src/contexts/AuthContext'
 import RootNavigation from './src/navigation/RootNavigation'
+import { useEffect } from 'react/cjs/react.production.min'
+import openRealm from './src/database/OpenRealm'
 
 const App = () => {
 

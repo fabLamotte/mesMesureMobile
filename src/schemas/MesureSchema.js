@@ -10,6 +10,7 @@ const MesureSchema = {
         fesses:"string",
         cuisses:"string",
         mollets:"string",
+        poids:"string"
     },
     primaryKey: '_id',
     assignee: {

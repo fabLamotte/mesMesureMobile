@@ -5,32 +5,34 @@ import { VictoryChart, VictoryLine, VictoryAxis, VictoryLabel } from "victory-na
 const Graph = (props) => {
 
     const {
-        title
+        setDataGraph,
+        userInfos,
+        title,
+        dataGraph
     } = props
 
     return(
         <View style={styles.container}>
             <Text style={styles.title}>{title? title : "Biceps"}</Text>
-            <VictoryChart height={250} >
+            <VictoryChart height={250}>
                 <VictoryLine 
                     style={{ bar: {
                         color: "red",
                       },
                       data: { stroke: "#c43a31" }, parent: { border: "1px solid #ccc"} }}
-                    data={[ { x: 1, y: 2 }, { x: 2, y: 3 }, { x: 3, y: 5 }, { x: 4, y: 4 }, { x: 5, y: 7 } ]}
-                    interpolation='natural'
-                    animate={{ duration: 2000, onLoad: { duration: 1000 } }}
+                    data={dataGraph}
                 />
                 <VictoryAxis
                     style={{
                         axis: {stroke: "white"},
-                        tickLabels: {stroke: "white"},
+                        tickLabels: {stroke: "white",angle:-50, fontSize:10, padding:25},
                     }}
                 />
                 <VictoryAxis dependentAxis
                     style={{
                         axis: {stroke: "white"},
                         tickLabels: {stroke: "white"},
+
                     }}
                 />
             </VictoryChart>

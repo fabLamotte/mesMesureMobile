@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
 import moment from 'moment'
 import { getApp } from './../database/GetRealmApp'
 import openRealm from './../database/OpenRealm'
+import { ObjectId } from 'bson'
 
 
 const NextButton = (props) => {
@@ -51,13 +52,36 @@ const NextButton = (props) => {
                 var mesures = {date,biceps,pectoraux,taille,fesses,cuisses,mollet}
 
             // Appel de la BDD
-                // const app = getApp()
-                // const realm = await openRealm()
-                // const userContainer = realm.objects("User")
-                // const user = userContainer.filtered("_id == " + app.currentUser.id)
-                // console.log(user)
-                
-
+                const app = getApp()
+                const realm = await openRealm()
+                realm.write(() => {
+                    let mesure = realm.create(
+                        "Mesure",
+                        {
+                            _id: ObjectId(),
+                            _partition: app.currentUser.id,
+                            date:date.toString(),
+                            biceps:biceps,
+                            pectoraux:pectoraux,
+                            taille:taille,
+                            fesses:fesses,
+                            cuisses:cuisses,
+                            mollets:mollet
+                        },
+                        'modified'
+                    )
+                    console.log(app.currentUser.id)
+                    let user = realm.objectForPrimaryKey('User', ObjectId(app.currentUser.id))
+                    realm.create(
+                        'User',
+                        {
+                            ...user,
+                            _id: ObjectId(app.currentUser.id),
+                            mesures: [...user.mesures, mesure]
+                        },
+                        'modified'
+                    )
+                })
             // Redirection vers la progression
             navigation.navigate("Progression")
         }
