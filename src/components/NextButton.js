@@ -66,7 +66,8 @@ const NextButton = (props) => {
                             taille:taille,
                             fesses:fesses,
                             cuisses:cuisses,
-                            mollets:mollet
+                            mollets:mollet,
+                            poids:poids
                         },
                         'modified'
                     )

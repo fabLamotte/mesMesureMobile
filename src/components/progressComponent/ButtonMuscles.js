@@ -8,7 +8,8 @@ const ButtonMuscles = (props) => {
 
     const {
         setTitle,
-        setZoneCible
+        setZoneCible,
+        loadDataGraph
     } = props
 
     return (
@@ -16,7 +17,7 @@ const ButtonMuscles = (props) => {
             <FlatList
                 data={Muscles}
                 horizontal
-                renderItem={({item}) => <ButtonItem item={item} setTitle={setTitle} setZoneCible={setZoneCible} />}
+                renderItem={({item}) => <ButtonItem item={item} setTitle={setTitle} setZoneCible={setZoneCible} loadDataGraph={loadDataGraph} />}
                 keyExtractor={item => item.id}
                 scrollEnabled={true}
                 showsHorizontalScrollIndicator={false}

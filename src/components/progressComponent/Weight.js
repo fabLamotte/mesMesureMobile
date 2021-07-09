@@ -13,7 +13,7 @@ const Weight = (props) => {
                 <Text style={styles.weight}>{userInfos.mesures[userInfos.mesures.length-1].poids}</Text>
                 <Text style={styles.kilo}>KG</Text>
             </View>
-            <Text style={styles.perte}></Text>
+            <Text style={styles.perte}>{userInfos.mesures[userInfos.mesures.length-1].poids - userInfos.mesures[0].poids} KG</Text>
         </View>
     )
 }
@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     container:{
         justifyContent:'center',
         alignItems:'flex-start',
-        flexDirection:'row',
-        paddingTop:20,
+        flexDirection:'row'
     },
     weightZone:{
         height:'100%',
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     perte:{
         fontSize:15,
         color:'red',
-        fontWeight:'bold',
+        fontWeight:'bold'
     }
 })
 

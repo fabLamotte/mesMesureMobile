@@ -14,7 +14,7 @@ const Stack = createStackNavigator()
 
 const HomeNavigation = () => {
 
-    const [canWriteNow, setCanWriteNow] = useState(false)
+    const [canWriteNow, setCanWriteNow] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
 
     const loadData = async() => {
@@ -23,10 +23,12 @@ const HomeNavigation = () => {
         const realm = await openRealm()
         const user = realm.objectForPrimaryKey("User", ObjectId(app.currentUser.id))
 
-        // Accès à la dernière date de la prise de mesure
-        let lastDate = new Date(user.mesures[user.mesures.length-1].date);
-        let date = new Date()
-        date > lastDate.addDays(7)? setCanWriteNow(true) : setCanWriteNow(false)
+        if(user.mesures.length > 0){
+            // Accès à la dernière date de la prise de mesure
+            let lastDate = new Date(user.mesures[user.mesures.length-1].date);
+            let date = new Date()
+            date > lastDate.addDays(7)? setCanWriteNow(true) : setCanWriteNow(false)
+        }
         setIsLoading(false)
     }
 

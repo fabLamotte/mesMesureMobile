@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native'
 
 const ButtonItem = (props) => {
 
     const {
         item,
-        setTitle
+        setTitle,
+        loadDataGraph
     } = props
+
+    const fetch = (target) => {
+        setTitle(target)
+        loadDataGraph(target.toLowerCase())
+    }
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button} activeOpacity={1} onPress={() => setTitle(item.title)}>
+            <TouchableOpacity style={styles.button} activeOpacity={1} onPress={() => fetch(item.title)}>
                 <Text style={styles.title}>{item.title}</Text>
             </TouchableOpacity>
         </View>
@@ -19,11 +25,11 @@ const ButtonItem = (props) => {
 
 const styles = StyleSheet.create({
     container:{
-        height:70,
+        height:50,
         justifyContent:'center'
     },
     button:{
-        height:50,
+        height:40,
         width:150,
         backgroundColor:'#880C0C',
         justifyContent:'center',

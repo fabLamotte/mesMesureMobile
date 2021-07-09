@@ -11,39 +11,48 @@ import { AuthContext } from '../contexts/AuthContext'
 import openRealm from './../database/OpenRealm'
 import { getApp } from './../database/GetRealmApp'
 import { ObjectId } from 'bson'
-import moment from 'moment'
 
-const Progress = () => {
+const Progress = (props) => {
+    const {
+        navigation
+    } = props
 
     const [title, setTitle] = useState("")
     const {signOut} = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(true)
-    const [userInfos, setUserInfos] = useState({})
-    const [dataGraph, setDataGraph] = useState("")
-    const [zoneCible, setZoneCible] = useState("")
+    const [userInfos, setUserInfos] = useState([])
+    const [dataGraph, setDataGraph] = useState([])
 
+    // Fonction de déconnexion
     async function onLogOut() {
         await signOut()
     }
 
+    // Fonction rendant le graphique intéractif au clique sur un boutton
     const loadDataGraph = (target) =>{
+        let datas = []
+
         userInfos.mesures.map((element) =>{
             let cible = ""
+            let date = new Date(element.date)
 
-            switch(zoneCible){
+            switch(target){
                 case "biceps": cible = element.biceps;break;
                 case "pectoraux": cible = element.pectoraux;break;
                 case "taille": cible = element.taille;break;
                 case "fesses": cible = element.fesses;break;
                 case "cuisses": cible = element.cuisses;break;
                 case "mollets": cible = element.mollets;break;
+                case "poids": cible = element.poids;break;
                 default : cible = element.biceps;break;
             }
-
-            console.log(cible)
+            datas.push({x: date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear(), y: parseInt(cible)})
         })
+
+        setDataGraph(datas)
     }
 
+    // Fonction de chargement des données de l'utilisateur + premier chargement du graphique
     const loadUserInformations = async() =>{
         const app = getApp()
         const realm = await openRealm()
@@ -51,10 +60,13 @@ const Progress = () => {
         if(user){
             setUserInfos(user)
             let datas = []
+
             user.mesures.map((element) => {
-                moment().locale()
-                datas.push({x: moment(element.date).format("DD / MM / YY"), y: element.biceps})
+                let cible = element.poids
+                let date = new Date(element.date)
+                datas.push({x: date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear(), y: parseInt(cible)})
             })
+
             setDataGraph(datas)
             setIsLoading(false)
         }
@@ -68,13 +80,29 @@ const Progress = () => {
         <SplashScreen />
     ) : (
         <View style={styles.container}>
-            <View style={styles.titleZone}>
-                <Text style={styles.title}>Votre progression</Text>
-            </View>
-            <ButtonMuscles setTitle={setTitle} setDataGraph={setDataGraph} userInfos={userInfos} />
-            <Graph title={title} dataGraph={dataGraph} />
-            <Weight userInfos={userInfos} />
-            <DateChecking />
+            <View style={styles.titleZone}> <Text style={styles.title}>Votre progression</Text> </View>
+
+            {/* Liste des bouttons cliquables */}
+            <ButtonMuscles 
+            setTitle={setTitle} 
+            loadDataGraph={loadDataGraph} 
+            userInfos={userInfos} />
+
+            {/* Intégration du graphique */}
+            <Graph 
+            title={title} 
+            dataGraph={dataGraph} />
+
+            {/* Affichage amélioration du poids */}
+            <Weight 
+            userInfos={userInfos} />
+
+            {/* Affichage du temps restant avant l'inscription de nouvelles données */}
+            <DateChecking 
+            date={userInfos.mesures[userInfos.mesures.length-1].date} 
+            navigation={navigation} />
+
+            {/* Boutton de déconnexion */}
             <View style={styles.buttonZone}>
                 <TouchableOpacity style={styles.disconnect} onPress={onLogOut}>
                     <Text style={styles.whiteColor}>Me déconnecter</Text>
@@ -114,8 +142,7 @@ const styles = StyleSheet.create({
     whiteColor:{
         color:'white',
         fontSize:18,
-        fontWeight:'bold',
-
+        fontWeight:'bold'
     }
 })
 
